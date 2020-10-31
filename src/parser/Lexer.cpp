@@ -101,7 +101,7 @@ void Lexer::lex_number() {
                     num += peek();
                 } while(is_hex(advance()));
 
-                add_token(TokenType::Number, num);
+                add_token(TokenType::Int, num);
                 return;
             }
             case 'b':
@@ -114,7 +114,7 @@ void Lexer::lex_number() {
                     num += peek();
                 } while(is_digit(advance()));
 
-                add_token(TokenType::Number, num);
+                add_token(TokenType::Int, num);
                 return;
             }
             default: num = "0";
@@ -132,7 +132,7 @@ void Lexer::lex_number() {
         // As far as numbers are object we must check if there's number after dot
         // and to advance through it
         if (!is_digit(peek_next())) {
-            add_token(TokenType::Number, num);
+            add_token(TokenType::Int, num);
             return;
         }
 
@@ -144,9 +144,10 @@ void Lexer::lex_number() {
         do {
             num += peek();
         } while(is_digit(advance()));
+        add_token(TokenType::Float, num);
+    } else {
+        add_token(TokenType::Int, num);
     }
-
-    add_token(TokenType::Number, num);
 }
 
 TokenStream Lexer::lex(const std::string & s) {

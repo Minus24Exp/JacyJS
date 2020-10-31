@@ -4,6 +4,7 @@
 #include <string>
 #include "tree/BaseVisitor.h"
 #include "tree/nodes.h"
+#include "translator/Codegen.h"
 
 class Translator : public BaseVisitor {
 public:
@@ -13,6 +14,7 @@ public:
     std::string translate(const StmtList & tree);
 
 private:
+    Codegen cg;
     std::string code;
 
     void add(const std::string & c);

@@ -27,6 +27,7 @@ void Translator::visit(Block * block) {
     add("{");
     for (const auto & stmt : block->stmts) {
         stmt->accept(*this);
+        add(";");
     }
     add("}");
 }
@@ -103,7 +104,7 @@ void Translator::visit(TypeDecl * type_decl) {}
 // Expressions //
 /////////////////
 void Translator::visit(Literal * literal) {
-    add(literal->token.val);
+    add(cg.literal(literal));
 }
 
 void Translator::visit(Identifier * id) {
@@ -112,9 +113,11 @@ void Translator::visit(Identifier * id) {
 
 void Translator::visit(Infix * infix) {
     infix->left->accept(*this);
-    // TODO: Replace with overriding
-    add(op_to_str(infix->op.type));
+    add(".call_method('");
+    add(cg.op_method(infix->op));
+    add("', ");
     infix->right->accept(*this);
+    add(")");
 }
 
 void Translator::visit(Prefix * prefix) {

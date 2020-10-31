@@ -12,7 +12,8 @@ struct Token;
 using TokenStream = std::vector<Token>;
 
 enum class TokenType {
-    Number,
+    Int,
+    Float,
     String,
     Id,
     Nl,

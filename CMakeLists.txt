@@ -10,4 +10,4 @@ project(Jacy VERSION 0.0.1)
 
 file(GLOB_RECURSE SOURCES src/**/*.cpp src/*.cpp)
 include_directories(include/)
-add_executable(${PROJECT_NAME} ${SOURCES} include/translator/Translator.h src/translator/Translator.cpp)
+add_executable(${PROJECT_NAME} ${SOURCES} include/translator/Translator.h src/translator/Translator.cpp include/translator/Codegen.h src/translator/Codegen.cpp)
